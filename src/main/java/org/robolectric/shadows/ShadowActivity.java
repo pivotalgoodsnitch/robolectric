@@ -1,6 +1,7 @@
 package org.robolectric.shadows;
 
 import android.R;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Application;
 import android.app.Dialog;
@@ -35,6 +36,7 @@ import org.robolectric.annotation.Implements;
 import org.robolectric.annotation.RealObject;
 import org.robolectric.bytecode.RobolectricInternals;
 import org.robolectric.res.ResName;
+import org.robolectric.tester.android.view.RoboActionBar;
 import org.robolectric.tester.android.view.RoboWindow;
 import org.robolectric.tester.android.view.RoboWindowManager;
 
@@ -53,6 +55,7 @@ public class ShadowActivity extends ShadowContextThemeWrapper {
   private Intent resultIntent;
   private Activity parent;
   private boolean finishWasCalled;
+  private RoboActionBar actionBar;
 
   private List<IntentForResult> startedActivitiesForResults = new ArrayList<IntentForResult>();
 
@@ -366,6 +369,14 @@ public class ShadowActivity extends ShadowContextThemeWrapper {
 
   public void setWindow(Window window) {
     field("mWindow").ofType(Window.class).in(realActivity).set(window);
+  }
+
+  @Implementation
+  public ActionBar getActionBar() {
+    if (actionBar == null) {
+      actionBar = new RoboActionBar();
+    }
+    return actionBar;
   }
 
   @Implementation
