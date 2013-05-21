@@ -1,5 +1,6 @@
 package org.robolectric.shadows;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Dialog;
 import android.appwidget.AppWidgetProvider;
@@ -717,6 +718,12 @@ public class ActivityTest {
     assertEquals(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT, activity.getRequestedOrientation());
     activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE);
     assertEquals(ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE, parentActivity.getRequestedOrientation());
+  }
+
+  @Test
+  public void getActionBar_shouldGetANonNullActionBar() throws Exception {
+    Activity activity = new Activity();
+    assertThat(activity.getActionBar()).isInstanceOfAny(ActionBar.class);
   }
 
   @Test
