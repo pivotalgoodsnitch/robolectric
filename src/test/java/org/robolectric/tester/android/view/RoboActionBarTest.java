@@ -32,4 +32,10 @@ public class RoboActionBarTest {
     actionBar.setDisplayShowTitleEnabled(false);
     assertThat(actionBar.getDisplayShowTitleEnabled()).isFalse();
   }
+
+  @Test
+  public void shouldSetTheTitle() throws Exception {
+    actionBar.setTitle("Robolectric");
+    assertThat(actionBar.getTitle()).isEqualTo("Robolectric");
+  }
 }
