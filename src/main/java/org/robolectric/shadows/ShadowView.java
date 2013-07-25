@@ -14,15 +14,17 @@ import android.view.TouchDelegate;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
-import java.io.PrintStream;
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
+
 import org.robolectric.Robolectric;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.annotation.RealObject;
 import org.robolectric.internal.HiddenApi;
+
+import java.io.PrintStream;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 import static org.robolectric.Robolectric.directlyOn;
 import static org.robolectric.Robolectric.shadowOf;
@@ -404,16 +406,6 @@ public class ShadowView {
     } catch (Exception e) {
       throw new RuntimeException(e);
     }
-  }
-
-  @Implementation
-  public void setTouchDelegate(TouchDelegate delegate) {
-    this.touchDelegate = delegate;
-  }
-
-  @Implementation
-  public TouchDelegate getTouchDelegate() {
-    return touchDelegate;
   }
 
   public boolean isAttachedToWindow() {

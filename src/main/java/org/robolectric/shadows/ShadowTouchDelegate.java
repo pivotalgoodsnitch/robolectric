@@ -5,8 +5,9 @@ import android.view.TouchDelegate;
 import android.view.View;
 import org.robolectric.annotation.Implements;
 import org.robolectric.annotation.RealObject;
+import org.robolectric.bytecode.RobolectricInternals;
 
-@Implements(TouchDelegate.class)
+@Implements(value = TouchDelegate.class, callThroughByDefault = true)
 public class ShadowTouchDelegate {
 
   @RealObject
@@ -15,9 +16,10 @@ public class ShadowTouchDelegate {
   private Rect bounds;
   private View delegateView;
 
-  public void __constructor__( Rect bounds, View delegateView ){
+  public void __constructor__(Rect bounds, View delegateView) {
     this.bounds = bounds;
     this.delegateView = delegateView;
+    RobolectricInternals.getConstructor(TouchDelegate.class, realObject, Rect.class, View.class).invoke(bounds, delegateView);
   }
 
   public Rect getBounds() {
@@ -27,5 +29,4 @@ public class ShadowTouchDelegate {
   public View getDelegateView() {
     return this.delegateView;
   }
-
 }
