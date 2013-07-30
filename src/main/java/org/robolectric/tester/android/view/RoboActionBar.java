@@ -8,8 +8,7 @@ import android.widget.SpinnerAdapter;
 public class RoboActionBar extends ActionBar {
 
   private View customView;
-  private boolean showCustom;
-  private boolean showTitle = true;
+  private int options = ActionBar.DISPLAY_SHOW_TITLE;
   private CharSequence title;
 
   @Override
@@ -98,12 +97,12 @@ public class RoboActionBar extends ActionBar {
 
   @Override
   public void setDisplayShowTitleEnabled(boolean showTitle) {
-    this.showTitle = showTitle;
+    toggleBitInMask(showTitle, ActionBar.DISPLAY_SHOW_TITLE);
   }
 
   @Override
   public void setDisplayShowCustomEnabled(boolean showCustom) {
-    this.showCustom = showCustom;
+    toggleBitInMask(showCustom, ActionBar.DISPLAY_SHOW_CUSTOM);
   }
 
   @Override
@@ -136,7 +135,7 @@ public class RoboActionBar extends ActionBar {
 
   @Override
   public int getDisplayOptions() {
-    return 0;
+    return options;
   }
 
   @Override
@@ -217,11 +216,11 @@ public class RoboActionBar extends ActionBar {
   public void removeOnMenuVisibilityListener(OnMenuVisibilityListener listener) {
   }
 
-  public boolean getDisplayShowCustomEnabled() {
-    return showCustom;
-  }
-
-  public boolean getDisplayShowTitleEnabled() {
-    return showTitle;
+  private void toggleBitInMask(boolean enableBit, int optionBit) {
+    if (enableBit) {
+      options |= optionBit;
+    } else {
+      options ^= optionBit;
+    }
   }
 }
