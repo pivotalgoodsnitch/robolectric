@@ -10,6 +10,7 @@ public class RoboActionBar extends ActionBar {
   private View customView;
   private boolean showCustom;
   private boolean showTitle = true;
+  private CharSequence title;
 
   @Override
   public void setCustomView(View view) {
@@ -60,6 +61,7 @@ public class RoboActionBar extends ActionBar {
 
   @Override
   public void setTitle(CharSequence title) {
+    this.title = title;
   }
 
   @Override
@@ -115,7 +117,7 @@ public class RoboActionBar extends ActionBar {
 
   @Override
   public CharSequence getTitle() {
-    return null;
+    return title;
   }
 
   @Override
